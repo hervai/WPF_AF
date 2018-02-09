@@ -4,11 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_AF"
+        xmlns:v="clr-namespace:WPF_AF.View"
         xmlns:vm="clr-namespace:WPF_AF.ViewModel"
          Title="Gen AF"  Height="1080" Width="1920" WindowStartupLocation="CenterScreen" WindowState="Maximized" Background="#FFF2F7FF" >
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:EquipementsViewModel}">
+            <v:EquipementsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:FonctionsViewModel}">
+            <v:FonctionsView/>
+        </DataTemplate>
+    </Window.Resources>
+
+   
     <DockPanel>
         <!--Menu principal -->
         <Menu x:Name="_mainMenu" DockPanel.Dock="Top" Background="Transparent">
@@ -48,8 +59,6 @@
             
         </StackPanel>
 
-        <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden">
-
-        </Frame>
+        <ContentControl x:Name="Pages" DockPanel.Dock="Bottom" Content="{Binding SelectedViewModel}"/>
     </DockPanel>
 </Window>

@@ -39,6 +39,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,8 +59,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="ViewModel\EquipementsViewModel.cs" />
+    <Compile Include="ViewModel\FonctionsViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ProjetViewModel.cs" />
+    <Compile Include="View\EquipementsView.xaml.cs">
+      <DependentUpon>EquipementsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FonctionsView.xaml.cs">
+      <DependentUpon>FonctionsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ProjetView.xaml.cs">
       <DependentUpon>ProjetView.xaml</DependentUpon>
     </Compile>
@@ -77,6 +86,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\EquipementsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FonctionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ProjetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

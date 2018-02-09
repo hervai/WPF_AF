@@ -14,7 +14,7 @@ using WPF_AF.View;
 
 namespace WPF_AF.ViewModel
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         public static Sql sql = new Sql();
         ProjetView vp = new ProjetView();
@@ -84,7 +84,17 @@ namespace WPF_AF.ViewModel
                 m_ExitCommand = value;
             }
         }
+        private object selectedViewModel;
 
+        public object SelectedViewModel
+
+        {
+
+            get { return selectedViewModel; }
+
+            set { selectedViewModel = value; OnPropertyChanged("SelectedViewModel"); }
+
+        }
         #endregion
 
         public MainWindowViewModel()
@@ -94,8 +104,24 @@ namespace WPF_AF.ViewModel
             AlarmesCommand = new RelayCommand(new Action<object>(NavigationAlarmes));
             OpenCommand = new RelayCommand(new Action<object>(Ouvrir));
             ExitCommand = new RelayCommand(new Action<object>(Quitter));
+
             //Remplissage de la liste des projets
             sql.GetProjets();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propName)
+
+        {
+
+            if (PropertyChanged != null)
+
+            {
+
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+
+            }
         }
 
         public void Nouveau(object obj)
@@ -120,12 +146,13 @@ namespace WPF_AF.ViewModel
 
         public void NavigationEquipements(object obj)
         {
-            MessageBox.Show("NavigationEquipements");
+            SelectedViewModel = new EquipementsViewModel();
+
         }
 
         public void NavigationFonctions(object obj)
         {
-            MessageBox.Show("NavigationFonctions");
+            SelectedViewModel = new FonctionsViewModel();
         }
 
         public void NavigationAlarmes(object obj)
