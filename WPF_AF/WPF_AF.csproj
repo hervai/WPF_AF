@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Modele\BDD\Equipement.cs" />
     <Compile Include="ViewModel\EquipementsViewModel.cs" />
     <Compile Include="ViewModel\FonctionsViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -100,7 +101,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modele\BDD\TableSql.cs" />
+    <Compile Include="Modele\BDD\ElementTableSql.cs" />
     <Compile Include="Modele\BDD\Projet.cs" />
     <Compile Include="Modele\BDD\Sql.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

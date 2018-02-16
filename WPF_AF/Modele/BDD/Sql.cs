@@ -20,25 +20,34 @@ namespace WPF_AF.Modele.BDD
         //Chaine de connexion "Base_eia117" définie dans App.config    
         public static string connextionstring = ConfigurationManager.ConnectionStrings["Base_eia117"].ToString();
         public static SqlConnection connexion = new SqlConnection(connextionstring);
-        
+
         //Déclaration des tables de la bases en leur classe équivalente (ObservableCollection<T>)
         public static ObservableCollection<Projet> ListeProjets = new ObservableCollection<Projet>();
+        public static ObservableCollection<Equipement> ListeEquipements = new ObservableCollection<Equipement>();
 
-
+      
         public Sql()
         {
-            connexion.Open();
-            SqlDependency.Stop(connextionstring);
-            SqlDependency.Start(connextionstring);
+            try
+            {
+
+                connexion.Open();
+                SqlDependency.Stop(connextionstring);
+                SqlDependency.Start(connextionstring);
+
+            }
+            catch (Exception e)
+            {
+
+            }
         }
-
-
+        
 
         /// <summary>
         /// Remplie la liste de projets à partir de la base SQL
         /// </summary>
         /// <param name="ListeProjets"></param>
-        public void GetProjets()
+        public static void GetProjets()
         {
             ListeProjets.Clear();
             //List<int> listeid = TableSql.GetIds(new Projet());
@@ -49,7 +58,22 @@ namespace WPF_AF.Modele.BDD
             }
         }
 
-      
+        /// <summary>
+        /// Remplie la liste des équipements à partir de la base SQL
+        /// </summary>
+        /// <param name="ListeEquipements"></param>
+        public static void GetEquipements()
+        {
+            ListeEquipements.Clear();
+            //List<int> listeid = TableSql.GetIds(new Projet());
+            List<int> listeid = new Equipement().GetIds();
+            foreach (int id in listeid)
+            {
+                Equipement e = new Equipement(id);
+                
+                ListeEquipements.Add(new Equipement(id));
+            }
+        }
 
 
     }

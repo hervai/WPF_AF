@@ -13,12 +13,12 @@ namespace WPF_AF.Modele.BDD
     /// <summary>
     /// Classe faisant le lien entre la base SQL et les classes du projet, qui doivent hériter de cette classe.
     /// </summary>
-    public abstract class TableSql
+    public abstract class ElementTableSql
     {
         public abstract string NomTable { get; }
         public abstract string Prefixtable { get; }
 
-        public TableSql()
+        public ElementTableSql()
         {
         }
 
@@ -36,11 +36,7 @@ namespace WPF_AF.Modele.BDD
                 T result = default(T);
                 using (SqlCommand cmd = new SqlCommand("select * from [GEN_AF_EIA117].[dbo]." + table + " where p_id=" + id, Sql.connexion))
                 {
-                    ////Creation de la dependance et association à Sqlcommand
-                    //SqlDependency dependency = new SqlDependency(Sql.cmd);
-                    ////Souscription aux evenements de SqlDependency
-                    //dependency.OnChange += new OnChangeEventHandler(OnDependencyChange);
-
+                    
                     cmd.CommandType = CommandType.Text;
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -53,7 +49,6 @@ namespace WPF_AF.Modele.BDD
                         }
                         reader.Close();
                     }
-
                 }
                 return result;
             }
@@ -73,18 +68,17 @@ namespace WPF_AF.Modele.BDD
         /// <param name="table"></param>
         /// <param name="prefixtable"></param>
         /// <returns></returns>
-        //public static List<int> GetIds(TableSql e)
         public List<int> GetIds()
-        {          
+        {
             string table, prefixtable;
             table = this.NomTable;
             prefixtable = this.Prefixtable;
-                   
+
             List<int> result = new List<int>();
             using (SqlCommand cmd = new SqlCommand("select " + prefixtable + "id from [GEN_AF_EIA117].[dbo]." + table, Sql.connexion))
             {
                 cmd.CommandType = CommandType.Text;
-                
+
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
 
@@ -100,6 +94,20 @@ namespace WPF_AF.Modele.BDD
                 }
             }
             return result;
+        }
+
+        /// <summary>
+        /// Supprimer la ligne 'id' de la table
+        /// </summary>
+        /// <param name="id">Id de la ligne à supprimer</param>
+        public void SupprimerLigneSql(int id)
+        {
+            using (SqlCommand cmd = new SqlCommand("delete from [GEN_AF_EIA117].[dbo]." + NomTable + " where " + Prefixtable + "id=" + id, Sql.connexion))
+            {
+                cmd.CommandType = CommandType.Text;
+                cmd.ExecuteNonQuery();
+
+            }
         }
     }
 }

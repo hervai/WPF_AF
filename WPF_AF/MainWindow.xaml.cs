@@ -31,6 +31,7 @@ namespace WPF_AF
         public MainWindow()
         {
             InitializeComponent();
+            
 
         }
                
@@ -42,7 +43,10 @@ namespace WPF_AF
 
             //Fermeture de la connexion à SQL
             Sql.connexion.Close();
+
+            Application.Current.Shutdown();
         }
 
+        
     }
 }

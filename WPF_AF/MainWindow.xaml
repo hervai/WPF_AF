@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:WPF_AF"
         xmlns:v="clr-namespace:WPF_AF.View"
         xmlns:vm="clr-namespace:WPF_AF.ViewModel"
-         Title="Gen AF"  Height="1080" Width="1920" WindowStartupLocation="CenterScreen" WindowState="Maximized" Background="#FFF2F7FF" >
+        xmlns:m="clr-namespace:WPF_AF.Modele.BDD"
+        TextOptions.TextFormattingMode="Display"
+        SnapsToDevicePixels="True"
+        UseLayoutRounding="True"
+         Title="Gen AF"  Height="1080" Width="1920" WindowStartupLocation="CenterScreen" WindowState="Maximized" Background="#FFF2F7FF" Closed="Window_Closed">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
@@ -18,12 +22,9 @@
             <v:FonctionsView/>
         </DataTemplate>
     </Window.Resources>
-
-   
     <DockPanel>
         <!--Menu principal -->
         <Menu x:Name="_mainMenu" DockPanel.Dock="Top" Background="Transparent">
-
             <MenuItem Name="Projet" Header="Projet">
                 <MenuItem Background="#FFF2F7FF" Header="_Nouveau" Command="{Binding OpenCommand}"/>
                 <MenuItem Background="#FFF2F7FF" Header="_Ouvrir" Command="{Binding OpenCommand}"/>
@@ -37,12 +38,11 @@
                 <Button Command="{Binding OpenCommand}">
                     <Image Source="Resources/Images/OpenFolder_16x.png"/>
                 </Button>
-                
+
             </ToolBar>
         </ToolBarTray>
         <!--Menu de navigation-->
         <StackPanel x:Name="_navigationMenu" DockPanel.Dock="Top" Orientation="Horizontal"  Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
-
             <StackPanel.Resources>
                 <!--Définition du style des boutons-->
                 <Style TargetType="{x:Type Button}">
@@ -56,9 +56,12 @@
             <Button HorizontalAlignment="Left" Command="{Binding EquipementsCommand}">Equipements</Button>
             <Button HorizontalAlignment="Left" Command="{Binding FonctionsCommand}">Fonctions</Button>
             <Button HorizontalAlignment="Left" Command="{Binding AlarmesCommand}">Alarmes</Button>
-            
         </StackPanel>
-
-        <ContentControl x:Name="Pages" DockPanel.Dock="Bottom" Content="{Binding SelectedViewModel}"/>
+        <StatusBar DockPanel.Dock="Bottom" HorizontalAlignment="Right">
+            <TextBlock>Projet actif :</TextBlock>          
+            <TextBlock
+               Text="{Binding Source={x:Static m:Projet.ProjetActif}, Path=Nom}"/>          
+        </StatusBar>
+        <ContentControl x:Name="Pages"  DockPanel.Dock="Left" Content="{Binding SelectedViewModel }"/>
     </DockPanel>
 </Window>

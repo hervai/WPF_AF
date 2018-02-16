@@ -17,7 +17,24 @@ namespace WPF_AF.ViewModel
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         public static Sql sql = new Sql();
-        ProjetView vp = new ProjetView();
+        ProjetView pv = new ProjetView();
+
+
+        private Projet _projetActif;
+        public Projet ProjetActif
+        {
+
+            get { return Projet.ProjetActif; }
+            set
+            {
+                if (Projet.ProjetActif != value)
+                {
+                    Projet.ProjetActif = value;
+                    _projetActif = Projet.ProjetActif;
+                    OnPropertyChanged("ProjetActif");
+                }
+            }
+        }
 
         #region Boutons de Commande
         private ICommand m_EquipementsCommand;
@@ -84,43 +101,48 @@ namespace WPF_AF.ViewModel
                 m_ExitCommand = value;
             }
         }
-        private object selectedViewModel;
+        private object _selectedViewModel;
 
         public object SelectedViewModel
 
         {
 
-            get { return selectedViewModel; }
+            get { return _selectedViewModel; }
 
-            set { selectedViewModel = value; OnPropertyChanged("SelectedViewModel"); }
+            set { _selectedViewModel = value; OnPropertyChanged("SelectedViewModel"); }
 
         }
+
+
+
         #endregion
 
         public MainWindowViewModel()
         {
+            //Définition des commandes de l'interface
             EquipementsCommand = new RelayCommand(new Action<object>(NavigationEquipements));
             FonctionsCommand = new RelayCommand(new Action<object>(NavigationFonctions));
             AlarmesCommand = new RelayCommand(new Action<object>(NavigationAlarmes));
             OpenCommand = new RelayCommand(new Action<object>(Ouvrir));
             ExitCommand = new RelayCommand(new Action<object>(Quitter));
 
+            //Initialisation du projet actif
+            Projet.ProjetActif = new Projet();
+            
             //Remplissage de la liste des projets
-            sql.GetProjets();
+            Sql.GetProjets();
+
         }
 
+        /// <summary>
+        /// Détection des changements de valeur de propriété
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
-
         private void OnPropertyChanged(string propName)
-
         {
-
             if (PropertyChanged != null)
-
             {
-
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
-
             }
         }
 
@@ -130,8 +152,12 @@ namespace WPF_AF.ViewModel
         }
 
         public void Ouvrir(object obj)
+
         {
-            vp.Show();
+            //Ouverture de la vue ProjetView en tant qu'enfant de MainWindow
+            pv.Owner = App.Current.MainWindow;
+            pv.Show();
+
         }
 
         public void Enregistrer(object obj)
@@ -159,6 +185,7 @@ namespace WPF_AF.ViewModel
         {
             MessageBox.Show("NavigationAlarmes");
         }
+
 
     }
 }

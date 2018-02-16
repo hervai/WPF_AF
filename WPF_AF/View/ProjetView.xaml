@@ -9,7 +9,9 @@
         Title="Liste des projets" Height="500" Width="700" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize" WindowStyle="ThreeDBorderWindow" IsManipulationEnabled="True">
     <!--<Window.Resources>
         <CollectionViewSource x:Key="ItemCollectionViewSource" CollectionViewType="ListCollectionView"></CollectionViewSource>
-        --><!--Définition des styles--><!--
+        -->
+    <!--Définition des styles-->
+    <!--
     </Window.Resources>-->
     <Window.DataContext>
         <vm:ProjetViewModel/>
@@ -34,6 +36,7 @@
         <Label Margin="38,0,37,0" Width="156" Grid.ColumnSpan="2">Liste des projets</Label>
         <ListView x:Name="lvProjets"   VerticalAlignment="Top" 
                     ItemsSource="{Binding Liste}"
+                    SelectedItem="{Binding CurrentSelection}"
                     DisplayMemberPath="Nom"
                     Grid.ColumnSpan="3"
                     Grid.RowSpan="2"

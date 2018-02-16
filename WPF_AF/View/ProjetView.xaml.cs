@@ -15,6 +15,7 @@ using WPF_AF.Modele.BDD;
 using WPF_AF;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using WPF_AF.Common;
 
 namespace WPF_AF.View
 {
@@ -23,14 +24,13 @@ namespace WPF_AF.View
     /// </summary>
     public partial class ProjetView : Window
     {
-      
+
         public ProjetView()
         {
             InitializeComponent();
 
-            //CollectionViewSource itemCollectionViewSource;
-            //itemCollectionViewSource = (CollectionViewSource)(FindResource("ItemCollectionViewSource"));
-            //itemCollectionViewSource.Source = Liste;
+
+
         }
 
 
