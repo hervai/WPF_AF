@@ -4,10 +4,85 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_AF.View"
+             xmlns:conv="clr-namespace:WPF_AF.Converters"
+             xmlns:vm="clr-namespace:WPF_AF.ViewModel"
+             xmlns:m="clr-namespace:WPF_AF.Modele.BDD"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="115,121,0,0" VerticalAlignment="Top"/>
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch"
+             Background="#FFF2F7FF"
+             d:DesignHeight="1920" d:DesignWidth="1080">
+    <UserControl.DataContext>
+        <vm:EquipementsViewModel/>
+    </UserControl.DataContext>
+    <!--<UserControl.Resources>
+            <conv:TabSizeConverter x:Key="tabSizeConverter" />
+            <Style TargetType="{x:Type TabItem}">
+                <Setter Property="Width">
+                    <Setter.Value>
+                        <MultiBinding Converter="{StaticResource tabSizeConverter}">
+                            <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
+            AncestorType={x:Type TabControl}}" />
+                            <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
+            AncestorType={x:Type TabControl}}" Path="ActualWidth" />
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+     </UserControl.Resources>-->
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Grid Name="Panel">
+                            <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Width="150"
+                                        Margin="10,2"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Panel" Property="Background" Value="LightSkyBlue" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Panel" Property="Background" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid x:Name="Grid1">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="30*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Content="Equipements"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               Grid.Row="0"
+         />
 
+       
+        <TabControl Grid.Row="1" 
+                    TabStripPlacement="Bottom"
+                    ItemsSource="{Binding ListeTypeEquipements}"                    
+         >
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Nom}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding PrefixApi}"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
     </Grid>
 </UserControl>

@@ -10,7 +10,13 @@
         TextOptions.TextFormattingMode="Display"
         SnapsToDevicePixels="True"
         UseLayoutRounding="True"
-         Title="Gen AF"  Height="1080" Width="1920" WindowStartupLocation="CenterScreen" WindowState="Maximized" Background="#FFF2F7FF" Closed="Window_Closed">
+        Title="Création d'analyse fonctionnelle et de programme automate"  
+        Height="1080" Width="1920" 
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Background="#FFF2F7FF"
+        Closed="Window_Closed"
+        >
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
@@ -20,7 +26,7 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:FonctionsViewModel}">
             <v:FonctionsView/>
-        </DataTemplate>
+        </DataTemplate>      
     </Window.Resources>
     <DockPanel>
         <!--Menu principal -->
@@ -62,6 +68,6 @@
             <TextBlock
                Text="{Binding Source={x:Static m:Projet.ProjetActif}, Path=Nom}"/>          
         </StatusBar>
-        <ContentControl x:Name="Pages"  DockPanel.Dock="Left" Content="{Binding SelectedViewModel }"/>
+        <ContentControl x:Name="Pages"  Content="{Binding SelectedViewModel }"/>
     </DockPanel>
 </Window>

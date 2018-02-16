@@ -13,8 +13,8 @@ namespace WPF_AF.Modele.BDD
 {
     public class Equipement : ElementTableSql
     {
-        //public new static string Table {get=> "projets"; }
-        //public new static string Prefixtable = "p_";
+        //public new static string Table {get=> "equipements"; }
+        //public new static string Prefixtable = "e_";
         public override string NomTable => "equipements";
         public override string Prefixtable => "e_";
 
@@ -72,6 +72,29 @@ namespace WPF_AF.Modele.BDD
         }
 
 
+
+        public TypeEquipement TypeEquipement
+        {
+            get
+            {
+                TypeEquipement te;
+                te = new TypeEquipement();
+                foreach (TypeEquipement e in Sql.ListeTypeEquipements)
+                {
+                    if (e.Id == Id)
+                    {
+                        te = e;
+                    }
+
+                }
+                return te;
+            }
+            set
+            {
+                Id = value.Id;
+            }
+        }
+
         public Equipement()
         {
             Tag = "";
@@ -84,7 +107,7 @@ namespace WPF_AF.Modele.BDD
         public Equipement(int id)
         {
             Id = id;
-            Equipement e = this.ReadTable<Equipement>("equipements", Id);
+            Equipement e = this.ReadTable<Equipement>(NomTable, Id);
             Tag = e.Tag;
             DescriptionFr = e.Tag;
             DescriptionEn = e.DescriptionEn;

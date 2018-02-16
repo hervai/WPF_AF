@@ -102,17 +102,12 @@ namespace WPF_AF.ViewModel
             }
         }
         private object _selectedViewModel;
-
         public object SelectedViewModel
-
         {
-
             get { return _selectedViewModel; }
 
             set { _selectedViewModel = value; OnPropertyChanged("SelectedViewModel"); }
-
         }
-
 
 
         #endregion
@@ -128,7 +123,7 @@ namespace WPF_AF.ViewModel
 
             //Initialisation du projet actif
             Projet.ProjetActif = new Projet();
-            
+
             //Remplissage de la liste des projets
             Sql.GetProjets();
 

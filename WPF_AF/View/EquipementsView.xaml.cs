@@ -23,6 +23,7 @@ namespace WPF_AF.View
         public EquipementsView()
         {
             InitializeComponent();
+            
         }
     }
 }

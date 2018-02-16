@@ -24,8 +24,9 @@ namespace WPF_AF.Modele.BDD
         //Déclaration des tables de la bases en leur classe équivalente (ObservableCollection<T>)
         public static ObservableCollection<Projet> ListeProjets = new ObservableCollection<Projet>();
         public static ObservableCollection<Equipement> ListeEquipements = new ObservableCollection<Equipement>();
+        public static ObservableCollection<TypeEquipement> ListeTypeEquipements = new ObservableCollection<TypeEquipement>();
 
-      
+
         public Sql()
         {
             try
@@ -50,7 +51,6 @@ namespace WPF_AF.Modele.BDD
         public static void GetProjets()
         {
             ListeProjets.Clear();
-            //List<int> listeid = TableSql.GetIds(new Projet());
             List<int> listeid = new Projet().GetIds();
             foreach (int id in listeid)
             {
@@ -65,7 +65,6 @@ namespace WPF_AF.Modele.BDD
         public static void GetEquipements()
         {
             ListeEquipements.Clear();
-            //List<int> listeid = TableSql.GetIds(new Projet());
             List<int> listeid = new Equipement().GetIds();
             foreach (int id in listeid)
             {
@@ -75,6 +74,22 @@ namespace WPF_AF.Modele.BDD
             }
         }
 
+
+        /// <summary>
+        /// Remplie la liste des équipements à partir de la base SQL
+        /// </summary>
+        /// <param name="ListeTypeEquipements"></param>
+        public static void GetTypeEquipements()
+        {
+            ListeTypeEquipements.Clear();
+            List<int> listeid = new TypeEquipement().GetIds();
+            foreach (int id in listeid)
+            {
+                TypeEquipement e = new TypeEquipement(id);
+
+                ListeTypeEquipements.Add(new TypeEquipement(id));
+            }
+        }
 
     }
 }

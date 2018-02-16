@@ -6,34 +6,28 @@
         xmlns:local="clr-namespace:WPF_AF.View"
         xmlns:vm="clr-namespace:WPF_AF.ViewModel"
         mc:Ignorable="d"
-        Title="Liste des projets" Height="500" Width="700" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize" WindowStyle="ThreeDBorderWindow" IsManipulationEnabled="True">
-    <!--<Window.Resources>
-        <CollectionViewSource x:Key="ItemCollectionViewSource" CollectionViewType="ListCollectionView"></CollectionViewSource>
-        -->
-    <!--Définition des styles-->
-    <!--
-    </Window.Resources>-->
-    <Window.DataContext>
+        Title="Liste des projets" Height="400" Width="600" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize" WindowStyle="ThreeDBorderWindow" IsManipulationEnabled="True">
+      <Window.DataContext>
         <vm:ProjetViewModel/>
     </Window.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="79*"/>
-            <RowDefinition Height="79*"/>
-            <RowDefinition Height="78*"/>
-            <RowDefinition Height="79*"/>
-            <RowDefinition Height="34*"/>
-            <RowDefinition Height="123*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Margin="38,0,37,0" Width="156" Grid.ColumnSpan="2">Liste des projets</Label>
+        <Label Margin="38,0,37,0" Width="156" Grid.ColumnSpan="5">Ouvrir un projet</Label>
         <ListView x:Name="lvProjets"   VerticalAlignment="Top" 
                     ItemsSource="{Binding Liste}"
                     SelectedItem="{Binding CurrentSelection}"

@@ -34,7 +34,7 @@ namespace WPF_AF.Modele.BDD
             try
             {
                 T result = default(T);
-                using (SqlCommand cmd = new SqlCommand("select * from [GEN_AF_EIA117].[dbo]." + table + " where p_id=" + id, Sql.connexion))
+                using (SqlCommand cmd = new SqlCommand("select * from [GEN_AF_EIA117].[dbo]." + table + " where "+ Prefixtable +"id=" + id, Sql.connexion))
                 {
                     
                     cmd.CommandType = CommandType.Text;

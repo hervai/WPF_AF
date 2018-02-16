@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>trayicon_irJ_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -59,7 +62,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Converters\TabSizeConverter.cs" />
     <Compile Include="Modele\BDD\Equipement.cs" />
+    <Compile Include="Modele\BDD\TypeEquipement.cs" />
     <Compile Include="ViewModel\EquipementsViewModel.cs" />
     <Compile Include="ViewModel\FonctionsViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -136,6 +141,7 @@
     <Content Include="Resources\Images\OpenFolder_16x.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="trayicon_irJ_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -120,7 +120,7 @@ namespace WPF_AF.Modele.BDD
         public Projet(int id)
         {
             Id = id;
-            Nom = this.ReadTable<Projet>("projets", Id).Nom;
+            Nom = this.ReadTable<Projet>(NomTable, Id).Nom;
         }
         /// <summary>
         /// Définit le projet en cours à partir d'un id
@@ -134,7 +134,7 @@ namespace WPF_AF.Modele.BDD
 
         public void DefineProjetById(int id)
         {
-            this.Nom = this.ReadTable<Projet>("projets", id).Nom;
+            this.Nom = this.ReadTable<Projet>(NomTable, id).Nom;
         }
     }
 }
